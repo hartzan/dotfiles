@@ -1,0 +1,12 @@
+open_with 1
+set coloscheme jungle
+set colorscheme solarized
+set colorscheme default
+open_with 11
+
+shell run %s
+shell execute %s
+shell   %s
+shell ls
+shell 
+open_with 2

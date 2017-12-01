@@ -1,0 +1,13 @@
+name: normal
+root: ~/
+
+
+windows:
+    - docker1:
+      - ssh hate@docker1
+    - docker2:
+      - ssh hate@docker2
+    - docker3:
+      - ssh hate@docker3
+    - docker4:
+      - ssh hate@docker4

@@ -1,0 +1,63 @@
+icons = "awesome"
+
+[theme]
+name = "slick"
+[theme.overrides]
+idle_bg = "#150E07"
+idle_fg = "#CFA760"
+
+
+[[block]]
+block = "focused_window"
+max_width = 21
+
+[[block]]
+block = "net"
+device = "wlp11s0"
+interval = 5
+graph_up = true
+graph_down = true
+ssid = true
+
+[[block]]
+block = "battery"
+device = "CMB1"
+interval = 10
+
+[[block]]
+block = "disk_space"
+path = "/"
+alias = "/"
+info_type = "available"
+unit = "GB"
+interval = 20
+warning = 20.0
+alert = 10.0
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{Mup}%"
+format_swap = "{SUp}%"
+
+[[block]]
+block = "temperature"
+interval = 10
+collapsed = false
+
+[[block]]
+block = "cpu"
+interval = 1
+
+[[block]]
+block = "load"
+interval = 1
+format = "{1m}"
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %d/%m %R"
