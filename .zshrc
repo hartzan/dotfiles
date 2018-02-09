@@ -7,17 +7,17 @@
 #  ██████ ██████ ░██  ░██░
 # ░░░░░░ ░░░░░░  ░░░  ░░░
 
+export DEFAULT_USER="hate"
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-#[ -n "$XTERM_VERSION" ] && transset-df --id "$WINDOWID" >/dev/null
-
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/hate/.oh-my-zsh
+export ZSH=/home/hate/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="half-life"
+ZSH_THEME="classyTouch"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -26,10 +26,6 @@ ZSH_THEME="half-life"
 # An empty array have no effect
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-if which ruby >/dev/null && which gem >/dev/null; then
-    PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-fi
-export EDITOR='vim'
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -74,32 +70,45 @@ export EDITOR='vim'
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  archlinux
+  battery
 )
 
 source $ZSH/oh-my-zsh.sh
 
-source ~/.bin/tmuxinator.zsh
-
-
 # User configuration
+
+#export PATH=$HOME/.config/Scripts
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+# Preferred editor
+export EDITOR='vim'
+# Preferred browser
+export BROWSER="chromium"
+
+#fzf
+export FZF_CTRL_R_OPTS='--sort --exact'
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+# Import the colors.
+. "${HOME}/.cache/wal/colors.sh"
+
 # ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
+export SSH_KEY_PATH="~/.ssh/id_rsa"
+
+#Check the weather:
+weath() { curl wttr.in/$1 ;}
+
+#FASD
+eval "$(fasd --init auto)"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -109,11 +118,19 @@ source ~/.bin/tmuxinator.zsh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias cp='cp -i'
-alias mv='mv -i'
-alias rm='rm -i'
-alias mux='tmuxinator'
-export DEFAULT_USER="hate"
-# Import colorscheme from 'wal'
-(wal -r &)
+alias openskylab="openvpn --ca OPNsense-udp-1194-ca.crt --tls-auth OPNsense-udp-1194-tls.key"
+alias ycommit="yadm commit -av"
+alias ypush="yadm push -u origin master"
+alias reload="source ~/.zshrc"
+alias rdpsky="rdesktop -u hate@sky.lab -p 0n3m3dFuj1 -g 1366x768 &"
+alias torrent="transmission-remote -n 'transmission:transmission' -a"
+alias 2rancher="rsync -av --exclude-from '/home/hate/exclude.txt' /home/hate hate@rancher:/home/hate/backup/arch-i3"
+alias 2freenas="rsync -av --exclude-from '/home/hate/exclude.txt' /home/hate /home/hate/freenas/backup/arch-i3"
+alias jsondown="sudo pacman -U /var/cache/pacman/pkg/jsoncpp-1.8.4-1-x86_64.pkg.tar.xz"
+alias mirror="sudo reflector --protocol https --latest 50 --number 20 --sort rate --save /etc/pacman.d/mirrorlist"
+alias v="f -e vim"             #quick opening files with vim
+alias m="f -e mpv"             #quick opening files with mpv
+alias o="a -e xdg-open"        #quick opening files with xdg-open
+alias ..="cd .."
+alias userkey="gpg --search-keys"
 #neofetch

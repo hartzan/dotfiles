@@ -1,0 +1,20 @@
+rofi.font:Misc Ohsnap 12
+rofi.color-enabled:	true
+rofi.fake-transparency:	true
+rofi.lines:		20
+rofi.bw:		0
+rofi.opacity:		"10"
+rofi.hide-scrollbar:	true
+rofi.width:		30
+# Dark theme.
+rofi.theme: ~/.cache/wal/colors-rofi-dark.rasi
+inputbar {
+     children: [ prompt, textbox-prompt-colon, entry, case-indicator ];
+ }
+
+ textbox-prompt-colon {
+     text-color: inherit;
+     expand: false;
+     margin: 0 0.3em 0em 0em;
+     str: ":";
+ }    
