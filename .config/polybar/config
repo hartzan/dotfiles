@@ -16,42 +16,51 @@ green = #B3BB67
 blue = #7FA0BC
 alert = #bd2c40
 
-[bar/example]
+[bar/top]
 monitor = ${env:MONITOR:LVDS-1}
-width = 100%
-height = 22
-;offset-x = 1%
-;offset-y = 1%
-;radius = 6.0
-fixed-center = true
-bottom = false
-background = ${colors.background}
-foreground = ${colors.foreground}
-line-size = 0
-;line-color = #f00
-border-size = 4
-border-color = ${colors.background}
-padding-left = 1
-padding-right = 1
-module-margin-left = 1
-module-margin-right = 1
-;locale = ie_IE.UTF-8
-font-0 = Misc Ohsnap:pixelsize=12;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = FontAwesome:size=10.5;1
-modules-left = i3 openweather
+include-file = ~/.config/polybar/top-bar
+modules-left = i3
 modules-center = term chrome fx editor fm music kraken
 modules-right = github pkg mail volume battery wlan eth networkmanager powermenu clock
-tray-position =
-;tray-padding = 2
-;tray-background = ${colors.background-alt}
-;tray-transparent = true
-;tray-offset-x =
-;tray-detached = false
-;tray-maxsize = 24
-;wm-restack = i3
-scroll-up = i3wm-wsnext
-scroll-down = i3wm-wsprev
+
+
+[bar/bottom]
+monitor = ${env:MONITOR:LVDS-1}
+include-file = ~/.config/polybar/bottom-bar
+modules-left = hostname
+modules-center = openweather
+modules-right = temperature memory cpu
+
+[module/hostname]
+type = custom/script
+interval = 256
+format = "<label> "
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground}
+exec = echo "$(uname -n)"
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <ramp> <label>
+format-underline = ${xrdb:color1}
+;format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature%
+label-warn =  %temperature%
+label-warn-foreground = ${colors.alert}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+ramp-foreground = ${colors.foreground}
+
 
 [module/github]
 type = internal/github
@@ -61,6 +70,7 @@ token = ${file:/home/hate/.token1}
 empty-notifications = false
 ; Number of seconds in between requests
 interval = 10
+format-prefix = ""
 
 [module/pkg]
 type = custom/script
@@ -90,7 +100,7 @@ ws-icon-1 = 2:;
 ws-icon-2 = 3:;
 ws-icon-3 = 4:;
 ws-icon-4 = 5:;
-ws-icon-5 = 6:;
+ws-icon-5 = 6:;
 ws-icon-6 = 7:;
 ws-icon-7 = 8:;
 ws-icon-8 = 9:;
@@ -115,7 +125,7 @@ label-urgent-padding = 1
 
 [module/kraken]
 type = custom/text
-content = 
+content = 
 content-foreground = ${colors.foreground}
 click-left = gitkraken &
 
@@ -225,19 +235,19 @@ label-indicator-margin = 1
 label-indicator-foreground = ${colors.red}
 label-indicator-background = ${colors.background}
 
-;[module/cpu]
-;type = internal/cpu
-;interval = 1
-;format-prefix = " "
-;format-prefix-foreground = ${colors.foreground-alt}
-;label = %{A1:gnome-terminal --geometry 86x10 -e htop:}%percentage%%%{A}
+[module/cpu]
+type = internal/cpu
+interval = 1
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+label = %{A1:urxvt --geometry 86x10 -e htop:}%percentage%%%{A}
 
-;[module/memory]
-;type = internal/memory
-;interval = 1
-;format-prefix = " "
-;format-prefix-foreground = ${colors.foreground-alt}
-;label = %{A1:gnome-terminal --geometry 86x10 -e htop:}%percentage_used%%%{A}
+[module/memory]
+type = internal/memory
+interval = 1
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+label = %{A1:urxvt --geometry 86x10 -e htop:}%percentage_used%%%{A}
 
 [module/date]
 type = custom/script
